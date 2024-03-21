@@ -4,5 +4,7 @@
 
 ### Backend
 - SpringBoot
+- MySQL
 - Mybatis-plus
 - Lombok
+
