@@ -37,3 +37,4 @@ build/
 pom.xml
 
 src/main/resources/application.properties
+*.properties
