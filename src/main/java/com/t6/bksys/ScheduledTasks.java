@@ -16,6 +16,7 @@ public class ScheduledTasks {
     private final ClassroomService classroomService;
     private final StringRedisTemplate stringRedisTemplate;
 
+    //定时任务一 ： 每小时生成每个教室的随机码
     @Autowired
     public ScheduledTasks(ClassroomService classroomService, StringRedisTemplate stringRedisTemplate) {
         this.classroomService = classroomService;
