@@ -7,8 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface RecordRemindBeforeMapper {
-    @Select("SELECT record_id FROM record WHERE TIMESTAMPDIFF(MINUTE, start_time, NOW()) BETWEEN 9 AND 11 ")
-    List<Integer> getRecordsWithinTimeRangeBefore();
+    @Select("SELECT user.email FROM user,record WHERE record.user_id = user.user_id AND TIMESTAMPDIFF(MINUTE, NOW(),record.start_time) BETWEEN 14 AND 16")
+    List<String> getRecordsWithinTimeRangeBefore();
 }
 
 

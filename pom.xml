@@ -56,11 +56,15 @@
             <artifactId>jedis</artifactId>
             <version>5.2.0-beta1</version>
         </dependency>
-        <!-- SLF4J 的日志接口 -->
-
-
-
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version> <!-- 使用最新的版本 -->
+        </dependency>
 
     </dependencies>
 

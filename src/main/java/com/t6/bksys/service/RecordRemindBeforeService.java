@@ -14,8 +14,8 @@ public class RecordRemindBeforeService {
     public RecordRemindBeforeService(RecordRemindBeforeMapper recordRemindBeforeMapper){
         this.recordRemindBeforeMapper = recordRemindBeforeMapper;
     }
-    public List<Integer> getremindRecord(){
-        List<Integer> record = recordRemindBeforeMapper.getRecordsWithinTimeRangeBefore();
-        return record;
+    public List<String> getremindRecord(){
+        List<String> emails = recordRemindBeforeMapper.getRecordsWithinTimeRangeBefore();
+        return emails;
     }
 }

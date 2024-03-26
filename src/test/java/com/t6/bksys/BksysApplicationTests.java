@@ -1,15 +1,37 @@
 package com.t6.bksys;
 
+
+import com.t6.bksys.service.MailUtil;
+import com.t6.bksys.service.RecordRemindAfterService;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import redis.clients.jedis.Jedis;
 
+import java.util.List;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 @SpringBootTest
 class BksysApplicationTests {
+    @Autowired
+    private MailUtil mailUtil;
+
+    private RecordRemindAfterService recordRemindAfterService;
+    private static final Logger logger = LoggerFactory.getLogger(SendafterEmail.class);
+    @Autowired
+    public BksysApplicationTests(RecordRemindAfterService recordRemindAfterService){
+        this.recordRemindAfterService = recordRemindAfterService;
+    }
 
     @Test
     void contextLoads() {
-
+        List<String> emails = recordRemindAfterService.getremindRecord();
+        emails.forEach(email -> {
+            logger.info(email);
+        });
     }
     @Test
     void redis_test(){

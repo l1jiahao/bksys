@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.Random;
 
 @Component
-public class ScheduledTasks {
+public class GenerateClassroomcode {
 
     private final ClassroomService classroomService;
     private final StringRedisTemplate stringRedisTemplate;
 
     //定时任务一 ： 每小时生成每个教室的随机码
     @Autowired
-    public ScheduledTasks(ClassroomService classroomService, StringRedisTemplate stringRedisTemplate) {
+    public GenerateClassroomcode(ClassroomService classroomService, StringRedisTemplate stringRedisTemplate) {
         this.classroomService = classroomService;
         this.stringRedisTemplate = stringRedisTemplate;
     }
