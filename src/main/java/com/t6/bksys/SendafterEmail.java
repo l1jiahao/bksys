@@ -24,12 +24,10 @@ public class SendafterEmail {
     public SendafterEmail(RecordRemindAfterService recordRemindAfterService){
         this.recordRemindAfterService = recordRemindAfterService;
     }
-    @Scheduled(cron = "0 * * * * *") // 每天每个整点执行
+    @Scheduled(cron = "50 * * * * *") // 每天每个整点执行
     public void SendEmail() {
-        logger.info("执行");
         List<String> emails = recordRemindAfterService.getremindRecord();
         emails.forEach(email -> {
-            logger.info(email);
             try {
                 mailUtil.sendSimpleMail(email, "预约座位提醒", "您好，您预约的座位已过期10分钟，请您尽快签到");
                 logger.info("邮件成功发送到：" + email);
