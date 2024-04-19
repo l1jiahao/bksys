@@ -3,6 +3,7 @@ package com.t6.bksys;
 
 import com.t6.bksys.service.MailUtil;
 import com.t6.bksys.service.RecordRemindAfterService;
+import com.t6.bksys.service.RecordSearchService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 class BksysApplicationTests {
     @Autowired
     private MailUtil mailUtil;
+
+    @Autowired
+    private RecordSearchService recordSearchService;
 
     private RecordRemindAfterService recordRemindAfterService;
     private static final Logger logger = LoggerFactory.getLogger(SendafterEmail.class);
@@ -51,6 +55,10 @@ class BksysApplicationTests {
 
         // 关闭连接
         jedis.close();
+    }
+    @Test
+    void RecordSearchtest(){
+        System.out.println(recordSearchService.getRecordsByUserId(4));
     }
 
 }

@@ -27,7 +27,7 @@ public class GenerateClassroomcode {
         this.stringRedisTemplate = stringRedisTemplate;
     }
 
-    @Scheduled(cron = "* * * * * *") // 每天每个整点执行
+    @Scheduled(cron = "0 * * * * *") // 每天每个整点执行
     public void updateRoomIdKeys() {
         List<Integer> roomIds = classroomService.getAllRoomIds();
         roomIds.forEach(roomId -> {

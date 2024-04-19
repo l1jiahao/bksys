@@ -65,6 +65,11 @@
             <artifactId>javax.mail</artifactId>
             <version>1.6.2</version> <!-- 使用最新的版本 -->
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.83</version>
+        </dependency>
 
     </dependencies>
 
