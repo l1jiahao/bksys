@@ -70,28 +70,28 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.83</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>5.7.4</version> <!-- 使用最新的兼容版本 -->
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>5.7.3</version> <!-- 同上 -->
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>5.7.3</version> <!-- 同上 -->
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.security</groupId>-->
+<!--            <artifactId>spring-security-core</artifactId>-->
+<!--            <version>5.7.2</version> &lt;!&ndash; 使用最新的兼容版本 &ndash;&gt;-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.security</groupId>-->
+<!--            <artifactId>spring-security-config</artifactId>-->
+<!--            <version>5.7.2</version> &lt;!&ndash; 同上 &ndash;&gt;-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.security</groupId>-->
+<!--            <artifactId>spring-security-web</artifactId>-->
+<!--            <version>5.7.2</version> &lt;!&ndash; 同上 &ndash;&gt;-->
+<!--        </dependency>-->
 
-        <!-- JJWT library -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.9.1</version> <!-- 使用最新的稳定版本 -->
-        </dependency>
+<!--        &lt;!&ndash; JJWT library &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.jsonwebtoken</groupId>-->
+<!--            <artifactId>jjwt</artifactId>-->
+<!--            <version>0.9.1</version> &lt;!&ndash; 使用最新的稳定版本 &ndash;&gt;-->
+<!--        </dependency>-->
 
 
     </dependencies>
