@@ -11,4 +11,5 @@ public class User {
     private String account;
     private String password;
     private String role_type;
+    private String email;
 }
