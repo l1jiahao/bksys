@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select;
 public interface UserLoginMapper {
 
     /**
-     * 根据账号和密码从数据库中检索用户。
+     * 根据账号和密码从数据库中检索用户
      *
      * @param account  用户的账号
      * @param password 用户的密码
