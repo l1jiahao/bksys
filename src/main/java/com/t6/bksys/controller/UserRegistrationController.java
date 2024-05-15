@@ -1,5 +1,6 @@
 package com.t6.bksys.controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.alibaba.fastjson.JSONObject;
 import com.t6.bksys.entity.User;
 import com.t6.bksys.service.UserRegistrationService;
@@ -37,6 +38,7 @@ public class UserRegistrationController {
             JSONObject response = new JSONObject();
             response.put("code", 0);
             response.put("message", "注册失败: " + e.getMessage());
+            System.out.println(e);
             return ResponseEntity.ok(response.toJSONString());
         }
     }

@@ -13,3 +13,5 @@ public interface UserRegistrationMapper {
     @Options(useGeneratedKeys = true, keyProperty = "user_id")
     void insertUser(User user);
 }
+
+

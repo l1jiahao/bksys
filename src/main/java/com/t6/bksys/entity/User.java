@@ -6,20 +6,24 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class User {
-    private Integer id;
+    private Integer user_id;
     private String name;
     private String account;
     private String password;
-    private String role_type;
+    private String role_id;
     private String email;
+
+    public User() {
+
+    }
 
 
     public Integer getId() {
-        return id;
+        return user_id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer user_id) {
+        this.user_id = user_id;
     }
 
     public String getName() {
@@ -47,11 +51,11 @@ public class User {
     }
 
     public String getRole_type() {
-        return role_type;
+        return role_id;
     }
 
-    public void setRole_type(String role_type) {
-        this.role_type = role_type;
+    public void setRole_type(String role_id) {
+        this.role_id = role_id;
     }
 
     public String getEmail() {
@@ -65,11 +69,11 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + user_id +
                 ", name='" + name + '\'' +
                 ", account='" + account + '\'' +
                 ", password='" + password + '\'' +
-                ", role_type='" + role_type + '\'' +
+                ", role_type='" + role_id + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
