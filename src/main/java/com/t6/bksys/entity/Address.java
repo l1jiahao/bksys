@@ -3,7 +3,7 @@ package com.t6.bksys.entity;
 public class Address {
     private String building;
     private int floor;
-    private int address_id;
+    private int addressId;
 
     public String getBuilding() {
         return building;
@@ -23,10 +23,10 @@ public class Address {
 
 
     public int getAddress_id() {
-        return address_id;
+        return addressId;
     }
 
-    public void setAddress_id(int address_id) {
-        this.address_id = address_id;
+    public void setAddress_id(int addressId) {
+        this.addressId = addressId;
     }
 }
