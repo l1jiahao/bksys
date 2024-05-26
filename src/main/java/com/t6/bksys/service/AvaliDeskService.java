@@ -39,7 +39,7 @@ public class AvaliDeskService {
             }
         }
 
-        response.put("code", 0);
+        response.put("code", 1);
         JSONObject message = new JSONObject();
         message.put("data", availableSeats);
         response.put("message", message);
