@@ -3,6 +3,7 @@ package com.t6.bksys.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.t6.bksys.entity.Classroom;
+import com.t6.bksys.entity.Address;
 import com.t6.bksys.service.FindClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,8 @@ public class FindClassroomController {
             JSONArray classroomArray = new JSONArray();
 
             for (Classroom classroom : classrooms) {
+                Address address = classroomService.findAddressById(classroom.getaddress_id());
+
                 JSONObject jsonClassroom = new JSONObject();
                 jsonClassroom.put("room_id", classroom.getRoomId());
                 jsonClassroom.put("address_id", classroom.getaddress_id());
@@ -40,6 +43,8 @@ public class FindClassroomController {
                 jsonClassroom.put("open_time", classroom.getOpenTime().toString());
                 jsonClassroom.put("close_time", classroom.getCloseTime().toString());
                 jsonClassroom.put("status", classroom.getStatusId());
+                jsonClassroom.put("building", address.getBuilding());
+                jsonClassroom.put("floor", address.getFloor());
                 classroomArray.add(jsonClassroom);
             }
 
@@ -50,19 +55,6 @@ public class FindClassroomController {
             failMessage.put("code", 0);
             failMessage.put("message", "查询失败: " + e.getMessage());
             return ResponseEntity.badRequest().body(failMessage.toJSONString());
-        }
-    }
-
-    private String getStatusName(Integer statusId) {
-        switch (statusId) {
-            case 1:
-                return "开放";
-            case 2:
-                return "已关闭";
-            case 3:
-                return "暂停使用";
-            default:
-                return "未知状态";
         }
     }
 }

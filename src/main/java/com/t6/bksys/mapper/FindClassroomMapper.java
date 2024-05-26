@@ -1,6 +1,7 @@
 package com.t6.bksys.mapper;
 
 import com.t6.bksys.entity.Classroom;
+import com.t6.bksys.entity.Address;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -19,4 +20,11 @@ public interface FindClassroomMapper {
             @Result(column = "status_id", property = "statusId")
     })
     List<Classroom> findAll();
+
+    @Select("SELECT building, floor FROM address WHERE address_id = #{addressId}")
+    @Results({
+            @Result(column = "building", property = "building"),
+            @Result(column = "floor", property = "floor")
+    })
+    Address findAddressById(@Param("addressId") int addressId);
 }
