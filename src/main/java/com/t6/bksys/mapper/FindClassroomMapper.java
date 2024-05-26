@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface FindClassroomMapper {
-    @Select("SELECT * FROM classroom WHERE address_id IN (SELECT address_id FROM address WHERE building = #{building} AND floor = #{floor})")
+    @Select("SELECT * FROM classroom")
     @Results({
             @Result(column = "room_id", property = "roomId"),
             @Result(column = "address_id", property = "address_id"),
@@ -18,5 +18,5 @@ public interface FindClassroomMapper {
             @Result(column = "close_time", property = "closeTime"),
             @Result(column = "status_id", property = "statusId")
     })
-    List<Classroom> findByBuildingAndFloor(@Param("building") String building, @Param("floor") Integer floor);
+    List<Classroom> findAll();
 }

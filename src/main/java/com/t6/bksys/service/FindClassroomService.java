@@ -13,13 +13,14 @@ public class FindClassroomService {
 
     @Resource
     private FindClassroomMapper findClassroomMapper;
+
     @Autowired
     public FindClassroomService(FindClassroomMapper findClassroomMapper) {
         this.findClassroomMapper = findClassroomMapper;
     }
 
     @Transactional
-    public List<Classroom> findClassroomsByBuildingAndFloor(String building, Integer floor) {
-        return findClassroomMapper.findByBuildingAndFloor(building, floor);
+    public List<Classroom> findAllClassrooms() {
+        return findClassroomMapper.findAll();
     }
 }

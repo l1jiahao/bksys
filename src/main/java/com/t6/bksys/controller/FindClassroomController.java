@@ -22,12 +22,10 @@ public class FindClassroomController {
     }
 
     @PostMapping("/find")
-    public ResponseEntity<String> findClassrooms(@RequestBody JSONObject requestBody) {
-        String building = requestBody.getString("building");
-        Integer floor = requestBody.getInteger("floor");
-
+    public ResponseEntity<String> findClassrooms(@RequestBody(required = false) JSONObject requestBody) {
         try {
-            List<Classroom> classrooms = classroomService.findClassroomsByBuildingAndFloor(building, floor);
+            List<Classroom> classrooms = classroomService.findAllClassrooms();
+
             JSONObject response = new JSONObject();
             response.put("code", 1);
             JSONArray classroomArray = new JSONArray();
@@ -41,7 +39,7 @@ public class FindClassroomController {
                 jsonClassroom.put("col_count", classroom.getColCount());
                 jsonClassroom.put("open_time", classroom.getOpenTime().toString());
                 jsonClassroom.put("close_time", classroom.getCloseTime().toString());
-                jsonClassroom.put("status", getStatusName(classroom.getStatusId()));
+                jsonClassroom.put("status", classroom.getStatusId());
                 classroomArray.add(jsonClassroom);
             }
 
