@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Resource
     private UserMapper userMapper;
-    public User getUserByUsername(String username) {
-        return userMapper.selectByUsername(username);
+    public User getUserByUsername(String user_id) {
+        return userMapper.selectByUserId(user_id);
     }
 }
