@@ -3,8 +3,7 @@ package com.t6.bksys.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
-@AllArgsConstructor
+
 public class User {
     private Integer user_id;
     private String name;
@@ -17,14 +16,6 @@ public class User {
 
     }
 
-
-    public Integer getId() {
-        return user_id;
-    }
-
-    public void setId(Integer user_id) {
-        this.user_id = user_id;
-    }
 
     public String getName() {
         return name;
@@ -50,13 +41,6 @@ public class User {
         this.password = password;
     }
 
-    public String getRole_type() {
-        return role_id;
-    }
-
-    public void setRole_type(String role_id) {
-        this.role_id = role_id;
-    }
 
     public String getEmail() {
         return email;
@@ -66,14 +50,30 @@ public class User {
         this.email = email;
     }
 
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getRole_id() {
+        return role_id;
+    }
+
+    public void setRole_id(String role_id) {
+        this.role_id = role_id;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + user_id +
+                "user_id=" + user_id +
                 ", name='" + name + '\'' +
                 ", account='" + account + '\'' +
                 ", password='" + password + '\'' +
-                ", role_type='" + role_id + '\'' +
+                ", role_id='" + role_id + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }

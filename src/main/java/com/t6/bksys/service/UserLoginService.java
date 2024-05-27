@@ -28,7 +28,7 @@ public class UserLoginService {
         this.userLoginMapper = userLoginMapper;
     }
 
-    public String loginUser(String account, String password) {
+    public User loginUser(String account, String password) {
 
 //        // 使用用户名和密码进行身份认证
 //        Authentication authentication = authenticationManager.authenticate(
@@ -47,16 +47,19 @@ public class UserLoginService {
 
         // 通过 userLoginMapper 验证用户名和密码
         User user = userLoginMapper.loginUser(account, password);
+//        System.out.println(user.toString());
         if (user != null) {
             // 用户验证成功，生成JWT令牌
 //            return generateToken(user);
 
-            String token = "114514";
-            return token;
+//            String token = "114514";
+            return user;
         }
 
         // 用户名或密码错误
-        return "Invalid login credentials";
+//        return "Invalid login credentials";
+//        throw new IllegalArgumentException("登录失败：用户名或密码错误");
+        return null;
     }
 
 
