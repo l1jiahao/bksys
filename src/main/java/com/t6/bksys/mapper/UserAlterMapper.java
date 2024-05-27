@@ -7,6 +7,6 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserAlterMapper {
-    @Update("UPDATE user SET name = #{user.name}, password = #{user.password}, email = #{user.email} WHERE account = #{user.account}")
+    @Update("UPDATE user SET name = #{user.name}, password = #{user.password}, account = #{user.account}, role_id = #{user.role_id}, email = #{user.email} WHERE user_id = #{user.user_id}")
     void updateUser(@Param("user") User user);
 }

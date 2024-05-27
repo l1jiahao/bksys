@@ -22,7 +22,6 @@ public class UserAlterController {
 
     @PostMapping("/alter")
     public ResponseEntity<String> updateUser(@RequestBody JSONObject inputJson) {
-        logger.info("Received update request for user with token: {}", inputJson.getString("token"));
         try {
             // 解析用户信息
             User user = new User();
@@ -30,6 +29,8 @@ public class UserAlterController {
             user.setAccount(inputJson.getString("account"));
             user.setPassword(inputJson.getString("password"));
             user.setEmail(inputJson.getString("email"));
+            user.setUser_id(inputJson.getInteger("user_id"));
+            user.setRole_id(inputJson.getString("role_id"));
 
             // 调用 userService 更新用户信息
             boolean updateStatus = userAlterService.updateUser(user);
