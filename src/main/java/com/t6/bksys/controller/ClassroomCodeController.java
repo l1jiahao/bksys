@@ -19,10 +19,10 @@ public class ClassroomCodeController {
 
     @PostMapping("/assign")
     public ResponseEntity<String> checkClassroomCode(@RequestBody JSONObject requestBody) {
-        Integer roomId = requestBody.getInteger("room_id");
+        Integer recordId = requestBody.getInteger("record_id");
         String checkCode = requestBody.getString("check_code");
 
-        boolean isValid = classroomCodeService.checkClassroomCode(roomId, checkCode);
+        boolean isValid = classroomCodeService.checkClassroomCode(recordId, checkCode);
 
         JSONObject response = new JSONObject();
         if (isValid) {

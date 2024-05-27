@@ -1,5 +1,7 @@
 package com.t6.bksys.service;
 
+import com.t6.bksys.entity.Record;
+import com.t6.bksys.mapper.ClassroomCodeMapper;
 import com.t6.bksys.SendafterEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,15 +13,34 @@ import org.springframework.stereotype.Service;
 public class ClassroomCodeService {
 
     private final StringRedisTemplate stringRedisTemplate;
+    private final ClassroomCodeMapper classroomCodeMapper;
     private static final Logger logger = LoggerFactory.getLogger(SendafterEmail.class);
+
     @Autowired
-    public ClassroomCodeService(StringRedisTemplate stringRedisTemplate) {
+    public ClassroomCodeService(StringRedisTemplate stringRedisTemplate, ClassroomCodeMapper classroomCodeMapper) {
         this.stringRedisTemplate = stringRedisTemplate;
+        this.classroomCodeMapper = classroomCodeMapper;
     }
 
-    public boolean checkClassroomCode(Integer roomId, String checkCode) {
+    public boolean checkClassroomCode(Integer recordId, String checkCode) {
+        Record record = classroomCodeMapper.findRecordById(recordId);
+        if (record == null) {
+            logger.info("Record not found for record_id: " + recordId);
+            return false;
+        }
+
+        Integer roomId = record.getSeatId();
         String storedCode = stringRedisTemplate.opsForValue().get("room_id:" + roomId);
-        logger.info("此时正确的签到码为：",storedCode);
-        return checkCode.equals(storedCode);
+        logger.info("此时正确的签到码为：{}", storedCode);
+
+        if (checkCode.equals(storedCode)) {
+            if (record.getStatusid() == 1 || record.getStatusid() == 2) {
+                classroomCodeMapper.updateRecordStatus(recordId, 2);
+            }
+            return true;
+        } else if (record.getStatusid() == 3 || record.getStatusid() == 4) {
+            return false;
+        }
+        return false;
     }
 }
