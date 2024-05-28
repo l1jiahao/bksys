@@ -77,7 +77,7 @@ public class BookService {
                 if (!(end.isBefore(existingStart) || start.isAfter(existingEnd))) {
                     response.put("code", 0);
                     JSONObject message = new JSONObject();
-                    message.put("content", "座位已预约!");
+                    message.put("content", "时间冲突，座位已经被占用!");
                     response.put("message", message);
                     return response;
                 }
