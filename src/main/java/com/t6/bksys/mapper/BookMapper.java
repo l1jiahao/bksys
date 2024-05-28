@@ -15,7 +15,7 @@ public interface BookMapper {
     @Select("SELECT status_id FROM classroom WHERE room_id = #{roomId}")
     Integer getStatusIdByRoomId(@Param("roomId") Integer roomId);
 
-    @Select("SELECT * FROM record WHERE seat_id = #{seatId}")
+    @Select("SELECT * FROM record WHERE seat_id = #{seatId} AND status_id NOT IN (3, 4)")
     List<JSONObject> getRecordsBySeatId(@Param("seatId") Long seatId);
 
     @Insert("INSERT INTO record (seat_id, user_id, start_time, end_time, status_id) VALUES (#{seatId}, #{userId}, #{startTime}, #{endTime}, #{statusId})")
