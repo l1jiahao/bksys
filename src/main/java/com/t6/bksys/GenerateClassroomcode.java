@@ -18,7 +18,7 @@ public class GenerateClassroomcode {
     private final ClassroomService classroomService;
     private final StringRedisTemplate stringRedisTemplate;
 
-    private static final Logger logger = LoggerFactory.getLogger(SendafterEmail.class);
+    private static final Logger logger = LoggerFactory.getLogger(GenerateClassroomcode.class);
 
     //定时任务一 ： 每小时生成每个教室的随机码
     @Autowired
@@ -27,12 +27,12 @@ public class GenerateClassroomcode {
         this.stringRedisTemplate = stringRedisTemplate;
     }
 
-    @Scheduled(cron = "0 * * * * *") // 每天每个整点执行
+    @Scheduled(fixedDelay=60*60*1000)
     public void updateRoomIdKeys() {
         List<Integer> roomIds = classroomService.getAllRoomIds();
         roomIds.forEach(roomId -> {
-            logger.info("");
             int randomNumber = new Random().nextInt(900000) + 100000;
+            logger.info("roomId:"+roomId+"更新签到码为"+randomNumber);
             stringRedisTemplate.opsForValue().set("room_id:" + roomId, String.valueOf(randomNumber));
 
         });

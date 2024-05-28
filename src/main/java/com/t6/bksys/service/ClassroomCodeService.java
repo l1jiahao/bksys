@@ -1,6 +1,7 @@
 package com.t6.bksys.service;
 
 import com.t6.bksys.entity.Record;
+import com.t6.bksys.entity.Seat;
 import com.t6.bksys.mapper.ClassroomCodeMapper;
 import com.t6.bksys.SendafterEmail;
 import org.slf4j.Logger;
@@ -29,7 +30,13 @@ public class ClassroomCodeService {
             return false;
         }
 
-        Integer roomId = record.getSeatId();
+        Seat seat = classroomCodeMapper.findSeatById(record.getSeatId());
+        if (seat == null) {
+            logger.info("Seat not found for seat_id: " + record.getSeatId());
+            return false;
+        }
+
+        Integer roomId = seat.getRoomId();
         String storedCode = stringRedisTemplate.opsForValue().get("room_id:" + roomId);
         logger.info("此时正确的签到码为：{}", storedCode);
 

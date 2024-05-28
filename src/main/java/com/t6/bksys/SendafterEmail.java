@@ -24,7 +24,7 @@ public class SendafterEmail {
     public SendafterEmail(RecordRemindAfterService recordRemindAfterService){
         this.recordRemindAfterService = recordRemindAfterService;
     }
-    @Scheduled(cron = "50 0 * * * *") // 每天每个整点执行
+    @Scheduled(cron = "0 50 * * * *") // 每天每个整点执行
     public void SendEmail() {
         List<String> emails = recordRemindAfterService.getremindRecord();
         emails.forEach(email -> {
