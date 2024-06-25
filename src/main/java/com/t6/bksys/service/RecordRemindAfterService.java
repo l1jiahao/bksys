@@ -20,6 +20,7 @@ public class RecordRemindAfterService {
 
     public List<String> getremindRecord(){
         List<String>  emails = recordremindafterMapper.getRecordsWithinTimeRangeAfter();
+        recordremindafterMapper.updateRecordsStatusToThree();
         return emails;
     }
 }
