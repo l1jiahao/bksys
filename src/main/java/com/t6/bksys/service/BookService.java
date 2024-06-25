@@ -15,10 +15,12 @@ import java.util.List;
 public class BookService {
 
     private final BookMapper bookMapper;
+    private final ScheduledTaskService scheduledTaskService;
 
     @Autowired
-    public BookService(BookMapper bookMapper) {
+    public BookService(BookMapper bookMapper, ScheduledTaskService scheduledTaskService) {
         this.bookMapper = bookMapper;
+        this.scheduledTaskService = scheduledTaskService;
     }
 
     public JSONObject reserveSeat(Long userId, Long seatId, String startTime, String endTime) {
@@ -100,6 +102,12 @@ public class BookService {
 
             // 创建预约记录
             bookMapper.createRecord(seatId, userId, start, end, 1);
+
+            // 获取生成的记录ID
+            Long recordId = bookMapper.getMaxRecordId();
+
+            // 调度检查任务
+            scheduledTaskService.scheduleStatusCheck(recordId, start);
 
             response.put("code", 1);
             JSONObject message = new JSONObject();

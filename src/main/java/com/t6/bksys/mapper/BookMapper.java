@@ -22,6 +22,15 @@ public interface BookMapper {
     @Insert("INSERT INTO record (seat_id, user_id, start_time, end_time, status_id) VALUES (#{seatId}, #{userId}, #{startTime}, #{endTime}, #{statusId})")
     void createRecord(@Param("seatId") Long seatId, @Param("userId") Long userId, @Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime, @Param("statusId") Integer statusId);
 
+    @Select("SELECT MAX(record_id) FROM record")
+    Long getMaxRecordId();
+
+    @Select("SELECT status_id FROM record WHERE record_id = #{recordId}")
+    Integer getStatusIdByRecordId(@Param("recordId") Long recordId);
+
+    @Update("UPDATE record SET status_id = #{statusId} WHERE record_id = #{recordId}")
+    void updateStatusId(@Param("recordId") Long recordId, @Param("statusId") Integer statusId);
+
     @Select("SELECT open_time, close_time FROM classroom WHERE room_id = #{roomId}")
     ClassroomTime getClassroomTimeByRoomId(@Param("roomId") Integer roomId);
 
