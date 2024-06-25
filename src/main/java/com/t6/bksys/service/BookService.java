@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -49,12 +50,26 @@ public class BookService {
             LocalDateTime start;
             LocalDateTime end;
             try {
-                start = LocalDateTime.parse(startTime,formatter);
+                start = LocalDateTime.parse(startTime, formatter);
                 end = LocalDateTime.parse(endTime, formatter);
             } catch (DateTimeParseException e) {
                 response.put("code", 0);
                 response.put("message", "时间格式错误: " + e.getMessage());
-                response.put("message2",startTime);
+                response.put("message2", startTime);
+                return response;
+            }
+
+            // 查询教室的开放和关闭时间
+            BookMapper.ClassroomTime classroomTime = bookMapper.getClassroomTimeByRoomId(roomId);
+            LocalTime openTime = classroomTime.getOpenTime();
+            LocalTime closeTime = classroomTime.getCloseTime();
+
+            // 检查预约时间是否在教室开放时间内
+            if (start.toLocalTime().isBefore(openTime) || end.toLocalTime().isAfter(closeTime)) {
+                response.put("code", 0);
+                JSONObject message = new JSONObject();
+                message.put("content", "在教室预约时间外!");
+                response.put("message", message);
                 return response;
             }
 
@@ -66,14 +81,14 @@ public class BookService {
             for (JSONObject record : records) {
                 start1 = record.getString("start_time");
                 end1 = record.getString("end_time");
-                if(start1.length()==16){
-                    start1 = start1+":00";
+                if (start1.length() == 16) {
+                    start1 = start1 + ":00";
                 }
-                if(end1.length()==16){
+                if (end1.length() == 16) {
                     end1 = end1 + ":00";
                 }
-                LocalDateTime existingStart = LocalDateTime.parse(start1.replace('T',' '), formatter);
-                LocalDateTime existingEnd = LocalDateTime.parse(end1.replace('T',' '), formatter);
+                LocalDateTime existingStart = LocalDateTime.parse(start1.replace('T', ' '), formatter);
+                LocalDateTime existingEnd = LocalDateTime.parse(end1.replace('T', ' '), formatter);
                 if (!(end.isBefore(existingStart) || start.isAfter(existingEnd))) {
                     response.put("code", 0);
                     JSONObject message = new JSONObject();

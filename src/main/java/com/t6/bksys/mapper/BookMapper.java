@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Mapper
@@ -20,4 +21,29 @@ public interface BookMapper {
 
     @Insert("INSERT INTO record (seat_id, user_id, start_time, end_time, status_id) VALUES (#{seatId}, #{userId}, #{startTime}, #{endTime}, #{statusId})")
     void createRecord(@Param("seatId") Long seatId, @Param("userId") Long userId, @Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime, @Param("statusId") Integer statusId);
+
+    @Select("SELECT open_time, close_time FROM classroom WHERE room_id = #{roomId}")
+    ClassroomTime getClassroomTimeByRoomId(@Param("roomId") Integer roomId);
+
+    class ClassroomTime {
+        private LocalTime openTime;
+        private LocalTime closeTime;
+
+        // Getters and Setters
+        public LocalTime getOpenTime() {
+            return openTime;
+        }
+
+        public void setOpenTime(LocalTime openTime) {
+            this.openTime = openTime;
+        }
+
+        public LocalTime getCloseTime() {
+            return closeTime;
+        }
+
+        public void setCloseTime(LocalTime closeTime) {
+            this.closeTime = closeTime;
+        }
+    }
 }
