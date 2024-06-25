@@ -1,6 +1,7 @@
 package com.t6.bksys.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.t6.bksys.entity.Classroom;
 import com.t6.bksys.entity.Record;
 import com.t6.bksys.entity.Seat;
 import com.t6.bksys.mapper.ClassroomGetAllRecordMapper;
@@ -22,6 +23,13 @@ public class ClassroomGetAllRecordService {
     public JSONObject getAllRecords() {
         JSONObject response = new JSONObject();
         List<Seat> seats = classroomGetAllRecordMapper.getAllSeats();
+        List<Classroom> classrooms = classroomGetAllRecordMapper.getAllClassrooms();
+
+        Map<Integer, String> roomIdToNameMap = new HashMap<>();
+        for (Classroom classroom : classrooms) {
+            roomIdToNameMap.put(classroom.getRoomId(), classroom.getRoomName());
+        }
+
         Map<Integer, JSONObject> classroomMap = new HashMap<>();
 
         for (Seat seat : seats) {
@@ -29,7 +37,7 @@ public class ClassroomGetAllRecordService {
             List<Record> records = classroomGetAllRecordMapper.getRecordsBySeatId(seat.getSeatId());
 
             JSONObject classroomData = classroomMap.getOrDefault(roomId, new JSONObject());
-            classroomData.put("classroom", roomId.toString());
+            classroomData.put("classroom", roomIdToNameMap.get(roomId));
             classroomData.put("count", classroomData.getIntValue("count") + records.size());
 
             long signCount = records.stream().filter(record -> record.getStatusid() == 2).count();

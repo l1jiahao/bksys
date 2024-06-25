@@ -1,5 +1,6 @@
 package com.t6.bksys.mapper;
 
+import com.t6.bksys.entity.Classroom;
 import com.t6.bksys.entity.Record;
 import com.t6.bksys.entity.Seat;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,4 +16,7 @@ public interface ClassroomGetAllRecordMapper {
 
     @Select("SELECT * FROM record WHERE seat_id = #{seatId}")
     List<Record> getRecordsBySeatId(Long seatId);
+
+    @Select("SELECT * FROM classroom")
+    List<Classroom> getAllClassrooms();
 }
